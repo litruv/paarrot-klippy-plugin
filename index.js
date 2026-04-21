@@ -269,52 +269,8 @@ module.exports = {
       }
     });
     
-    ctx.commands.register({
-      name: "giphy",
-      description: "Instant send first GIF result",
-      args: ["query"],
-      run: async ({ query, roomId }) => {
-        if (!query) {
-          return "Usage: /giphy [search term]";
-        }
-        
-        try {
-          const results = await searchGifs(query);
-          
-          if (!results) {
-            return `No GIFs found for "${query}"`;
-          }
-          
-          if (!ctx.matrixClient) {
-            return "Matrix client not available";
-          }
-          
-          if (!roomId) {
-            roomId = currentRoomId;
-            if (!roomId && ctx.matrixClient) {
-              const rooms = ctx.matrixClient.getRooms();
-              if (rooms && rooms.length > 0) {
-                roomId = rooms[rooms.length - 1].roomId;
-                currentRoomId = roomId;
-              }
-            }
-            if (!roomId) {
-              return "Cannot determine room. Send a message first.";
-            }
-          }
-          
-          await sendGifToRoom(roomId, results[0]);
-          return null;
-          
-        } catch (error) {
-          ctx.error('GIF command error:', error);
-          return `Error: ${error.message}`;
-        }
-      }
-    });
-    
     ctx.log('✅ Klipy GIF Plugin loaded - Floating picker mode');
-    ctx.log('Commands: /gif (floating picker), /giphy (instant send)');
+    ctx.log('Command: /gif (floating picker)');
   },
   
   onUnload: async () => {
