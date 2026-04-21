@@ -2,11 +2,7 @@
  * Klipy GIF Plugin - Floating Picker Overlay
  */
 
-module.exports = {
-  name: "Klipy GIF",
-  version: "5.0.0",
-  dependencies: {},
-  
+module.exports = {  
   onLoad: async (ctx) => {
     const API_KEY = 'Qn0Whvr0vXSySgxfQRr28Vnlv0hQVvMEfXL1hiBvCV7demCrrCdALvnI1aUU4QO4';
     const BASE_URL = 'https://api.klipy.com';
@@ -268,9 +264,6 @@ module.exports = {
         }
       }
     });
-    
-    ctx.log('✅ Klipy GIF Plugin loaded - Floating picker mode');
-    ctx.log('Command: /gif (floating picker)');
   },
   
   onUnload: async () => {
